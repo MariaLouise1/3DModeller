@@ -50,3 +50,31 @@ print("John" == "Dave")
 print(15 % 4)
 print(10 % 2 == 0)
 print(20 % 6)
+
+print(1 < 10)
+print(5 < 10)
+print(11 < 10)
+
+input3 = input("How old are you?")
+age = int(input3)
+
+if (age < 18):
+    print ("Unfortunately we cannot sell this alcohol to you")
+else:
+    print("Thank you for your alcohol purchase, that will be $30")
+
+movieGenre = input("What genre do you prefer? (mystery/comedy/romance/sci-fi): ")
+
+
+if (movieGenre == "mystery"):
+    print ("You might enjoy 'The Hound of Baskervilles' ")
+elif (movieGenre == "comedy"):
+    print("We recommend 'The Hitchhikers Guide to the Galaxy' ")
+elif (movieGenre == "romance"):
+    print("'Pride and Prejudice' could be the one for you ")
+elif (movieGenre == "sci-fi"):
+    print("Try 'Dune' for an epic adventure")
+else:
+    print("No Preference? How about 'Don Quixote'?")
+
+
