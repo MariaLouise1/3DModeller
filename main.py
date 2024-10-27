@@ -40,3 +40,13 @@ print(num2)
 answer2 = num1 + num2
 print(answer2)
 print("when the two numbers you chose are added together, the answer is: ", answer2)
+
+
+print(1 == 1)
+print(1 == 2)
+print("John" == "John")
+print("John" == "Dave")
+
+print(15 % 4)
+print(10 % 2 == 0)
+print(20 % 6)
