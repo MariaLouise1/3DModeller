@@ -3,7 +3,7 @@ class Viewer(object):
         """ Initialise the viewer. """
         self.init_interface()
         self.init_opengl()
-        self.init_scence()
+        self.init_scene()
         self.init_interaction()
         init_primitives()
 
@@ -12,7 +12,7 @@ def init_interface(self):
     glutInit()
     glutInitWindowSize(640,480)
     glutCreateWindow("3D Modeller")
-    glutInitDisyplayMode(GLUT_SINGLE | GLUT_RGB)
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
     glutDisplayFunc(self.render)
 
 def init_opengl(self):
@@ -52,8 +52,8 @@ def create_sample_scene(self):
     hierarchical_node = SnowFigure()
     hierarchical_node.translate(-2, 0 , -2)
     self.scene.add.node(hierarchical_node)
-
-def init_ineraction(self):
+BEC
+def init_interaction(self):
     """ init user interaction and callbacks """
     self.interaction = Interaction()
     self.interaction.register_callback('pick', self.pick)
@@ -69,3 +69,48 @@ if __name__ == "__main__":
     viewer = Viewer()
     viewer.main_loop()
 
+# class Viewer
+def render(self):
+    """ The render pass for the scene """
+    self.init.view()
+
+    glEnable(GL_LIGHTING)
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+    # Load the modelview matrix from the current state of the trackball 
+    glMatrixMode(GL_MODELVIEW)
+    glPushMatrix()
+    glLoadIdentity()
+    loc = self.interaction.translation
+    glTranslated(loc[0], loc[1], loc[2])
+    glMultMaxtrixf(self.interaction.trackball.matrix)
+
+    # store the inverse of the current modelview.
+    currentModelView = numpy.array(glGetFloatv(GL_MODELVIEW_MATRIX))
+    self.modelView = numpy.transpose(currentModelView)
+    self.inverseModelView = inv(numpy.transpose(currentModelView))
+
+    # render the scene. This will call the render function for each object 
+    # in the scene
+    self.scene.render()
+
+    # draw the grid
+    glDisable(GL_LIGHTING)
+    glCallList(G_OBJ_PLANE)
+    glPopMatrix()
+
+    # flush the buffer so that the scene can be drawn
+    glFlush()
+
+def init_view(self):
+    """ initialize the projection matrix """
+    xSize, ySize = glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT)
+    aspect_ratio = float(xSize) / float(ySize)
+
+    # load the project matrix. Always the same 
+    glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
+
+    glViewport(0, 0, xSize, ySize)
+    gluPerspective(70, aspect_ratio, 0.1, 1000.0)
+    glTranslated(0, 0, -15)
